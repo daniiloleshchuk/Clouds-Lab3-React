@@ -5,12 +5,14 @@ import axios from "axios";
 
 function App() {
   const [sensorData, setSensorData] = useState([]);
+  const [count, setCount] = useState([]);
   const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get("https://0uhfygqyr4.execute-api.us-east-2.amazonaws.com/Lab3_stage")
       setSensorData(response.data.body);
+      setCount(response.data.count);
       return response;
     }
     fetchData();
@@ -25,7 +27,7 @@ function App() {
           {/*  <th>Name</th>*/}
           {/*</tr>*/}
           {/*</thead>*/}
-          <h1>hey</h1>
+          <h1>{count}</h1>
           <tbody>
           {sensorData && sensorData.map(dat =>
               <tr key={dat.sample_time}>
